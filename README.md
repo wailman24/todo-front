@@ -1,4 +1,4 @@
-This Flutter application is connected to a To-Do API that I built during the web challenge. The app allows users to:
+This Flutter application is connected to a To-Do API https://github.com/wailman24/todo-api. The app allows users to:
 
 ✔️ Add tasks
 ✔️ Mark tasks as completed
