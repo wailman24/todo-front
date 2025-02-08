@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home.dart';
-//import 'package:flutter_application_1/login.dart';
-//import 'package:flutter_session_jwt/flutter_session_jwt.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -32,7 +31,7 @@ class _LoginState extends State<Login> {
     prefs = await SharedPreferences.getInstance();
   }
 
-  void loginUser() async {
+  Future<void> loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       var reqBody = {
         "email": emailController.text,
@@ -41,7 +40,7 @@ class _LoginState extends State<Login> {
 
       var response = await http.post(
           // use your own pc's ip adress or use 10.0.2.2 for emulators
-          Uri.parse("http://192.168.1.69:3000/api/users/login"),
+          Uri.parse("http://192.168.1.70:3000/api/users/login"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(reqBody));
 
@@ -68,6 +67,8 @@ class _LoginState extends State<Login> {
         _isNotValidate = true;
       });
     }
+
+    //Navigator.of
   }
 
   void opensignup() {

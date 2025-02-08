@@ -3,6 +3,7 @@ import 'package:flutter_application_1/todo_list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:micro_loaders/micro_loaders.dart';
 
 class Home extends StatefulWidget {
   final token;
@@ -13,8 +14,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  /*  void initState() {
+    super.initState();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+              child:
+                  SpiralLoader(color: Colors.white, size: 50, duration: 3000));
+        });
+    getTasks(); // Fetch tasks when the screen loads
+  } */
+
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Center(
+            child: SpiralLoader(color: Colors.white, size: 50, duration: 1700),
+          );
+        },
+      );
+
+      // Close the dialog after 2 seconds
+      Future.delayed(Duration(seconds: 2), () {
+        if (mounted) {
+          Navigator.of(context).pop(); // Dismiss the dialog
+        }
+      });
+    });
+
     getTasks(); // Fetch tasks when the screen loads
   }
 
@@ -34,7 +66,7 @@ class _HomeState extends State<Home> {
 
     var response = await http.get(
       // use your own pc's ip adress or use 10.0.2.2 for emulators
-      Uri.parse("http://192.168.1.69:3000/api/tasks"),
+      Uri.parse("http://192.168.1.70:3000/api/tasks"),
       headers: {"Content-Type": "application/json", "x-auth-token": token},
     );
 
@@ -66,7 +98,7 @@ class _HomeState extends State<Home> {
 
     var response = await http.post(
       // use your own pc's ip adress or use 10.0.2.2 for emulators
-      Uri.parse("http://192.168.1.69:3000/api/tasks"),
+      Uri.parse("http://192.168.1.70:3000/api/tasks"),
       headers: {"Content-Type": "application/json", "x-auth-token": token},
       body: jsonEncode({"title": taskController.text}),
     );
@@ -96,7 +128,7 @@ class _HomeState extends State<Home> {
 
       var response = await http.put(
           // use your own pc's ip adress or use 10.0.2.2 for emulators
-          Uri.parse("http://192.168.1.69:3000/api/tasks/$taskId"),
+          Uri.parse("http://192.168.1.70:3000/api/tasks/$taskId"),
           headers: {"Content-Type": "application/json", "x-auth-token": token},
           body: jsonEncode({"completed": newStatus}));
       if (response.statusCode == 200) {
@@ -126,7 +158,7 @@ class _HomeState extends State<Home> {
 
       var response = await http.delete(
           // use your own pc's ip adress or use 10.0.2.2 for emulators
-          Uri.parse("http://192.168.1.69:3000/api/tasks/$taskId"),
+          Uri.parse("http://192.168.1.70:3000/api/tasks/$taskId"),
           headers: {"Content-Type": "application/json", "x-auth-token": token});
 
       if (response.statusCode == 200) {

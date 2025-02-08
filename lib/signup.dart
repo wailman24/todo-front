@@ -29,8 +29,8 @@ class _SignupState extends State<Signup> {
         "password": passwordController.text
       };
       var response = await http.post(
-        // use your own pc's ip adress or use 10.0.2.2 for emulators
-          Uri.parse("http://192.168.1.69:3000/api/users/register"),
+          // use your own pc's ip adress or use 10.0.2.2 for emulators
+          Uri.parse("http://192.168.1.70:3000/api/users/register"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(regBody));
 
