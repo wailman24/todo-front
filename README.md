@@ -1,16 +1,20 @@
-# flutter_application_1
+This Flutter application is connected to a To-Do API that I built during the web challenge. The app allows users to:
+✔️ Add tasks
+✔️ Mark tasks as completed
+✔️ Delete tasks
+✔️ Sync tasks with the backend API
 
-A new Flutter project.
+🔗 Backend API
+The Flutter app communicates with a Node.js API that I developed in the web challenge. The API handles:
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+User authentication 
+CRUD operations for tasks
+Data storage
+🛠️ Technologies Used
+Frontend: Flutter (Dart)
+Backend: Node.js with Express
+Database: MongoDB 
+🚀 How It Works
+The app fetches tasks from the backend API.
+Users can add, update, or delete tasks.
+Any changes sync with the API in real-time.
